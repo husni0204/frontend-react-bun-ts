@@ -1,0 +1,21 @@
+# Ignore artifacts:
+build
+coverage
+.idea
+node_modules
+public
+.gitignore
+.prettierignore
+.prettierrc
+bun.lock
+eslint.config.js
+index.html
+package.json
+readme.md
+tsconfig.app.json
+tsconfig.json
+tsconfig.node.json
+vite.config.ts
+src/index.css
+src/vite-env.d.ts
+src/App.css
