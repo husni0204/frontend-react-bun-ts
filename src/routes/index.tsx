@@ -5,6 +5,7 @@ import { Routes, Route, Navigate } from "react-router";
 import Home from "../views/home";
 import Login from "../views/auth/login";
 import Register from "../views/auth/register";
+import Dashboard from "../views/admin/dashboard";
 
 export default function AppRoutes() {
     // menggunakan useContext untuk mendapatkan nilai dari AuthContext
@@ -23,6 +24,13 @@ export default function AppRoutes() {
 
             {/* route "/login" */}
             <Route path="/login" element={isAuthenticated ? <Navigate to="/admin/dashboard" replace /> : <Login />} />
+
+            {/* route "/admin/dashboard" */}
+            <Route path="/admin/dashboard" element={isAuthenticated ? <Dashboard /> : <Navigate to="/login" replace />} />
+
+            {/* Tambahkan rute 404 Not Found di bagian paling bawah */}
+            {/* <Route path="*" element={<div>404 - Halaman Tidak Ditemukan</div>} /> */}
+            <Route path="*" element={isAuthenticated ? <Dashboard /> : <Navigate to="/login" replace />} />
         </Routes>
     );
 }

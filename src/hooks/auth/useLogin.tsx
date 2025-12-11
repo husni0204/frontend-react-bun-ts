@@ -6,7 +6,7 @@ interface LoginRequest {
     password: string;
 }
 
-const useLogin = () => {
+export const useLogin = () => {
     return useMutation({
         mutationFn: async (data: LoginRequest) => {
             const response = await Api.post("/api/login", data);
@@ -15,5 +15,3 @@ const useLogin = () => {
         },
     });
 };
-
-export default useLogin;

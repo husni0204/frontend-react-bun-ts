@@ -4,7 +4,7 @@ import { useNavigate } from "react-router";
 
 import { AuthContext } from "../../context/AuthContext";
 
-const useLogout = () => {
+export const useLogout = () => {
     // ambil setIsAuthenticated dari context
     const authContext = useContext(AuthContext);
 
@@ -29,5 +29,3 @@ const useLogout = () => {
 
     return logout;
 };
-
-export default useLogout;

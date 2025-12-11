@@ -8,7 +8,7 @@ interface RegisterRequest {
     password: string;
 }
 
-const useRegister = () => {
+export const useRegister = () => {
     return useMutation({
         mutationFn: async (data: RegisterRequest) => {
             const response = await Api.post("/api/register", data);
@@ -17,5 +17,3 @@ const useRegister = () => {
         },
     });
 };
-
-export default useRegister;

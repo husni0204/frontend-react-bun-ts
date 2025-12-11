@@ -1,13 +1,21 @@
-import React, { useState, useEffect, type ReactNode } from "react";
+import React, { createContext, useState, useEffect, type ReactNode } from "react";
 import Cookies from "js-cookie";
-import { AuthContext } from "./AuthContext";
 
-// menentukan type props untuk AuthProvider
+// Menentukan tipe dari context value
+interface AuthContextType {
+    isAuthenticated: boolean;
+    setIsAuthenticated: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+// Membuat context dengan default value undefined
+export const AuthContext = createContext<AuthContextType | undefined>(undefined)!;
+
+// Menentukan tipe props untuk AuthProvider
 interface AuthProviderProps {
     children: ReactNode;
 }
 
-// komponen provider untuk konteks otentikasi
+// Komponen provider untuk konteks otentikasi
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     const [isAuthenticated, setIsAuthenticated] = useState<boolean>(!!Cookies.get("token"));
 

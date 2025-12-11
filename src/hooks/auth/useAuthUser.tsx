@@ -7,7 +7,7 @@ interface User {
     email: string;
 }
 
-const useAuthUser = (): User | null => {
+export const useAuthUser = (): User | null => {
     // get user data from cookies
     const user = Cookies.get("user");
 
@@ -15,5 +15,3 @@ const useAuthUser = (): User | null => {
     // Jika tidak ada, kembalikan null
     return user ? (JSON.parse(user) as User) : null;
 };
-
-export default useAuthUser;
