@@ -7,6 +7,14 @@ interface User {
     email: string;
 }
 
+// interface User {
+//     id: number;
+//     name: string;
+//     work_email: string;
+//     department: string;
+//     departmentt_id: number;
+// }
+
 export const useAuthUser = (): User | null => {
     // get user data from cookies
     const user = Cookies.get("user");

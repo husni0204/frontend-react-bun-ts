@@ -34,7 +34,7 @@ const Login: FC = () => {
             {
                 onSuccess: (data: any) => {
                     // set token to cookie
-                    Cookies.set("token", data.data.token);
+                    Cookies.set("token", data.data.access_token);
 
                     //set user to cookie
                     Cookies.set(
@@ -46,6 +46,16 @@ const Login: FC = () => {
                             email: data.data.user.email,
                         }),
                     );
+                    // Cookies.set(
+                    //     "employee_info",
+                    //     JSON.stringify({
+                    //         id: data.data.user.id,
+                    //         name: data.data.user.name,
+                    //         work_email: data.data.user.work_email,
+                    //         department: data.data.user.department,
+                    //         department_id: data.data.user.department_id,
+                    //     }),
+                    // );
 
                     //set  isAuthenticated to true
                     setIsAuthenticated(true);
@@ -74,13 +84,20 @@ const Login: FC = () => {
                         <form onSubmit={handleLogin}>
                             <div className="form-group mb-3">
                                 <label className="mb-1 fw-bold">Username</label>
-                                <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} className="form-control" placeholder="Username" />
+                                <input type="text" id="username" value={username} onChange={(e) => setUsername(e.target.value)} className="form-control" placeholder="Username" />
                                 {errors.username && <div className="alert alert-danger mt-2 rounded-4">{errors.username}</div>}
                             </div>
 
                             <div className="form-group mb-3">
                                 <label className="mb-1 fw-bold">Password</label>
-                                <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} className="form-control" placeholder="Password" />
+                                <input
+                                    type="password"
+                                    id="password"
+                                    value={password}
+                                    onChange={(e) => setPassword(e.target.value)}
+                                    className="form-control"
+                                    placeholder="Password"
+                                />
                                 {errors.password && <div className="alert alert-danger mt-2 rounded-4">{errors.password}</div>}
                             </div>
                             <button type="submit" className="btn btn-primary w-100 rounded-4" disabled={isPending}>
