@@ -3,7 +3,7 @@ import Api from "../../services/api";
 import Cookies from "js-cookie";
 
 // interface user
-export interface UserRequest {
+interface UserRequest {
     name: string;
     username: string;
     email: string;
@@ -14,7 +14,6 @@ export const useUserCreate = () => {
     return useMutation({
         // mutation for creating user
         mutationFn: async (data: UserRequest) => {
-            try {
                 // get token froom cookies
                 const token = Cookies.get("token");
 
@@ -27,9 +26,12 @@ export const useUserCreate = () => {
 
                 // return response data
                 return response.data;
-            } catch (error: any) {
-                throw new Error(error.response?.data?.message || "Failed to create users");
-            }
+
+                // try cacth block
+            // try {
+            // } catch (error: any) {
+            //     throw new Error(error.response?.data?.message || "Failed to create users");
+            // }
         },
     });
 };

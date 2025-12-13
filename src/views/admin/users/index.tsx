@@ -2,11 +2,33 @@ import type { FC } from 'react';
 import SidebarMenu from "../../../components/SidebarMenu";
 import { Link } from "react-router";
 import { useUsers, type User} from "../../../hooks/user/useUsers";
+import { useQueryClient } from "@tanstack/react-query";
+import { useUserDelete } from "../../../hooks/user/useUserDelete.tsx";
 
 
 const UsersIndex: FC = () => {
     // get users from useUsers
     const { data: users, isLoading, isError, error } = useUsers();
+
+    //initialize useQueryClient
+    const queryClient = useQueryClient();
+
+    //initialize useUserDelete
+    const { mutate, isPending } = useUserDelete();
+
+    //handle delete user
+    const handleDelete = (id: number) => {
+        if(confirm("Are you sure you want to delete this user?")) {
+
+            //call useUserDelete
+            mutate(id, {
+                onSuccess: () => {
+                    //refetch data
+                    queryClient.invalidateQueries({ queryKey: ['users'] });
+                }
+            });
+        }
+    }
 
     return (
         <div className="container mt-5 mb-5">
@@ -52,7 +74,9 @@ const UsersIndex: FC = () => {
                                             <td>{user.email}</td>
                                             <td className="text-center">
                                                 <Link to={`/admin/users/edit/${user.id}`} className="btn btn-sm btn-primary rounded-4 shadow-sm border-0 me-2">EDIT</Link>
-                                                <button className="btn btn-sm btn-danger rounded-4 shadow-sm border-0">DELETE</button>
+                                                <button onClick={() => handleDelete(user.id)} disabled={isPending} className="btn btn-sm btn-danger rounded-4 shadow-sm border-0">
+                                                    {isPending ? 'DELETING...' : 'DELETE'}
+                                                </button>
                                             </td>
                                         </tr>
                                     ))
