@@ -31,6 +31,7 @@ export const useUsers = () => {
 
                 // return data
                 return response.data.data as User[];
+
             } catch (error: any) {
                 throw new Error(error.response?.data?.message || "Failed to fetch users");
             }

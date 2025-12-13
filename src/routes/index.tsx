@@ -6,6 +6,7 @@ import Home from "../views/home";
 import Login from "../views/auth/login";
 import Register from "../views/auth/register";
 import Dashboard from "../views/admin/dashboard";
+import UsersIndex from "../views/admin/users";
 
 export default function AppRoutes() {
     // menggunakan useContext untuk mendapatkan nilai dari AuthContext
@@ -31,6 +32,9 @@ export default function AppRoutes() {
             {/* Tambahkan rute 404 Not Found di bagian paling bawah */}
             {/* <Route path="*" element={<div>404 - Halaman Tidak Ditemukan</div>} /> */}
             <Route path="*" element={isAuthenticated ? <Dashboard /> : <Navigate to="/login" replace />} />
+
+            {/*route "/admmin/users*/}
+            <Route path="/admin/users" element={isAuthenticated ? <UsersIndex/> : <Navigate to="/login" replace /> }/>
         </Routes>
     );
 }

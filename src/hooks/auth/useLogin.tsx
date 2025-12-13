@@ -15,6 +15,7 @@ export const useLogin = () => {
     return useMutation({
         mutationFn: async (data: LoginRequest) => {
             const response = await Api.post("/api/login", data);
+            return response.data;
             // const response = await Endpoint.post("/user/login", data, {
             //     headers: {
             //         // "Accept-Language": "string",
@@ -23,7 +24,6 @@ export const useLogin = () => {
             //     },
             // });
 
-            return response.data;
         },
     });
 };

@@ -34,7 +34,7 @@ const Login: FC = () => {
             {
                 onSuccess: (data: any) => {
                     // set token to cookie
-                    Cookies.set("token", data.data.access_token);
+                    Cookies.set("token", data.data.token);
 
                     //set user to cookie
                     Cookies.set(
